@@ -8,7 +8,7 @@ const bookmarkList = (function() {
         <label for="bookmark-url">Url</label>
             <input type="text" name="bookmark-url" class="js-bookmark-url" placeholder="https://thinkful.com">
         <label for="bookmark-des">Description</label>
-            <textarea rows="4" cols="50" name="bookmark-desc" class="js-bookmark-desc" placeholder="Website description."></textarea>            
+            <textarea rows="4" cols="50" name="bookmark-desc" class="js-bookmark-desc textarea-add-form" placeholder="Website description."></textarea>            
         <select id="select-rating">
             <option value="5">5 stars</option>
             <option value="4">4 stars</option>
@@ -58,7 +58,7 @@ const bookmarkList = (function() {
                     </form>
                     <button id="delete-bookmark">Delete</button>
                 </div>
-                <button class="toggle-extended-button">show more</button>
+                <button class="toggle-extended-button">details</button>
             </li>
         `
     }
@@ -87,6 +87,7 @@ const bookmarkList = (function() {
         const sortedBookmarks = store.list.filter(bookmark => bookmark.rating >= store.listSortBy);
         const bookmarkString = generateBookmarksString(sortedBookmarks);
         $('.bookmark-list').html(bookmarkString);
+        store.error = null;
     }
 
     const handleToggleAddingBookmark = () => {
