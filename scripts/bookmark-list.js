@@ -23,8 +23,8 @@ const bookmarkList = (function() {
 
     const bookmarkListButtons = `
     <button id="add-bookmark">Add</button>
-    <label for="rating-select">Sort by</label>
-    <select name="rating-select" id="select-sort-type">
+    <label class="bookmark-buttons" for="rating-select">Sort by</label>
+    <select class="bookmark-buttons" name="rating-select" id="select-sort-type">
         <option value="" selected disabled hidden>Rating</option>
         <option value="5">5 stars</option>
         <option value="4">4 stars</option>
@@ -53,10 +53,10 @@ const bookmarkList = (function() {
                 <div id="${bookmark.id}" class="hidden">
                     <a class="bookmark-link" href="${bookmark.url}">${bookmark.url}</a>
                     <form id="description-form">
-                    <textarea class="margin js-desc-form" rows="4" cols="50">${bookmark.desc}</textarea>
-                    <button type="submit">Edit description</button>
+                    <textarea id="desc-${bookmark.id}" class="margin js-desc-form" rows="4" cols="50">${bookmark.desc}</textarea>
+                    <button class="bookmark-buttons" type="submit">Edit description</button>
                     </form>
-                    <button id="delete-bookmark">Delete</button>
+                    <button class="bookmark-buttons" id="delete-bookmark">Delete</button>
                 </div>
                 <button class="toggle-extended-button">details</button>
             </li>
@@ -74,8 +74,10 @@ const bookmarkList = (function() {
 
     const render = () => {
         if(store.error){
-            $('.error-container').html(`<p>${store.error}</p>`)
+            $('.error-container').html(`<p>${store.error}</p>`);
             store.error = null;
+        } else {
+            $('.error-container').html('');
         }
 
         if(store.addingBookmark) {
@@ -154,7 +156,8 @@ const bookmarkList = (function() {
         $('.bookmark-list').on('submit', '#description-form', event => {
             event.preventDefault();
             const id = getItemIdFromElement(event.currentTarget);
-            const newDesc = {desc: $('.js-desc-form').val()}
+            const formId = `#desc-${id}`
+            const newDesc = {desc: $(formId).val()}
             dataBase.updateBookmark(id, newDesc, function(responseObject) {
                 store.updateBookmark(id, newDesc);
                 render();
@@ -162,6 +165,7 @@ const bookmarkList = (function() {
 
         });
         // make an on click for the desc-form to render the submit button
+        $('.bookmark-list').on('click', )
     }
 
     const bindEventListeners = () => {

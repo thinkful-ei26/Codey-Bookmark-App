@@ -17,6 +17,11 @@ a {
     text-decoration: none;
 }
 
+a:hover {
+    color: rgb(241, 221, 69);
+    cursor: pointer;
+}
+
 .hidden {
     display: none;
 }
@@ -27,14 +32,22 @@ a {
 
 button {
     margin: 10px;
+    background-color: white;
+    color: black;
+    border: 1px solid black;
 }
 
 button:hover {
+    border: 1px solid rgb(241, 221, 69);
     cursor: pointer;
 }
 
 button:hover:disabled {
     cursor: default;
+}
+
+select:hover {
+    cursor: pointer;
 }
 
 .toggle-extended-button:hover {
@@ -53,6 +66,11 @@ h3 {
 li {
     border: 1px solid black;
     margin: 10px;
+}
+
+.fa-star:hover {
+    color: rgb(241, 221, 69);
+    cursor: pointer;
 }
 
 .checked {
@@ -83,4 +101,8 @@ textarea {
 .textarea-add-form {
     border: 1px solid gray;
     text-align: left;
+}
+
+#add-bookmark, .bookmark-buttons {
+    display: inline-block;
 }
